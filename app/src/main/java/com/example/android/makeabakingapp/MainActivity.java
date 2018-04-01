@@ -2,9 +2,10 @@ package com.example.android.makeabakingapp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
 
+import com.example.android.makeabakingapp.adapter.RecipeAdapter;
 import com.example.android.makeabakingapp.network.Service;
 import com.example.android.makeabakingapp.recipes.Recipe;
 
@@ -33,8 +34,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
 
-                TextView tvTeste = findViewById(R.id.teste);
-                tvTeste.setText(response.raw().toString());
+                List<Recipe> recipes = response.body();
+
+                mRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                RecipeAdapter recipeAdapter = new RecipeAdapter(MainActivity.this, recipes);
+                mRecyclerView.setAdapter(recipeAdapter);
 
             }
 
@@ -43,5 +47,11 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void setupRecyclerView(List<Recipe> recipes) {
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        RecipeAdapter recipeAdapter = new RecipeAdapter(MainActivity.this, recipes);
+        mRecyclerView.setAdapter(recipeAdapter);
     }
 }

@@ -13,7 +13,7 @@ public interface Service {
 
     public static final String BASE_URL = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/";
 
-    @GET("baking.json/")
+    @GET("baking.json")
     Call<List<Recipe>> listRecipes();
 
     Retrofit retrofit = new Retrofit.Builder()
