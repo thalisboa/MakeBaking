@@ -12,20 +12,11 @@ public class Steps {
     private String videoURL;
     private String thumbnailURL;
 
-    public int getId() {
-        return id;
-    }
+
+    public int getId() {return id;}
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public String getShortDescription() {
-        return shortDescription;
-    }
-
-    public void setShortDescription(String shortDescription) {
-        this.shortDescription = shortDescription;
     }
 
     public String getDescription() {
@@ -51,4 +42,15 @@ public class Steps {
     public void setThumbnailURL(String thumbnailURL) {
         this.thumbnailURL = thumbnailURL;
     }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
+
+
+    }
+
 }

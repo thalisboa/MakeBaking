@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.Toast;
 
 import com.example.android.makeabakingapp.adapter.RecipeAdapter;
 import com.example.android.makeabakingapp.network.Service;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Recipe>> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Error", Toast.LENGTH_LONG).show();
 
             }
         });

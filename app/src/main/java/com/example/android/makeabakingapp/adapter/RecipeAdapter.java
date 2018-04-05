@@ -32,7 +32,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
     @Override
     public RecipeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        Log.i(TAG, "onCreateViewHolder: ");
+        //Log.i(TAG, "onCreateViewHolder: ");
         
         return new RecipeHolder(LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.rv_item, parent, false));
