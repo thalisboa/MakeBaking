@@ -1,19 +1,26 @@
 package com.example.android.makeabakingapp.recipes;
 
+import org.parceler.Parcel;
+
 /**
  * Created by thais.nonato on 3/12/2018.
  */
-
+@Parcel
 public class Steps {
 
-    private int id;
-    private String shortDescription;
-    private String description;
-    private String videoURL;
-    private String thumbnailURL;
+    int id;
+    String shortDescription;
+    String description;
+    String videoURL;
+    String thumbnailURL;
 
+    public Steps() {
 
-    public int getId() {return id;}
+    }
+
+    public int getId() {
+        return id;
+    }
 
     public void setId(int id) {
         this.id = id;

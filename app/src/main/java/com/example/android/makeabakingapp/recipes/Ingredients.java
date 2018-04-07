@@ -3,15 +3,22 @@ package com.example.android.makeabakingapp.recipes;
 
 import com.google.gson.annotations.SerializedName;
 
+import org.parceler.Parcel;
+
+@Parcel
 public class Ingredients {
 
     @SerializedName("ingredient")
-    public String name;
 
-    public String quantity;
+    String name;
 
-    public String measure;
+    String quantity;
 
+    String measure;
+
+    public Ingredients(){
+
+    }
 
     public void setName(String name) {
         this.name = name;

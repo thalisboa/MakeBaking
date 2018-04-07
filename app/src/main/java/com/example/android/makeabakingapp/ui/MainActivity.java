@@ -1,4 +1,4 @@
-package com.example.android.makeabakingapp;
+package com.example.android.makeabakingapp.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
+import com.example.android.makeabakingapp.R;
 import com.example.android.makeabakingapp.adapter.RecipeAdapter;
 import com.example.android.makeabakingapp.network.Service;
 import com.example.android.makeabakingapp.recipes.Recipe;

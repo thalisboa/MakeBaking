@@ -1,23 +1,29 @@
 package com.example.android.makeabakingapp.recipes;
 
 
+import org.parceler.Parcel;
+
 import java.util.List;
 
+@Parcel
 public class Recipe {
+    String id;
 
-    private String id;
+    String name;
 
-    private String name;
+    String servings;
 
-    private String servings;
+    List<Ingredients> ingredients;
 
-    private List<Ingredients> ingredients;
-
-    private List<Steps> steps;
-
+    List<Steps> steps;
 
 
-    public String getId() {return id;}
+    public Recipe(){
+    }
+
+    public String getId() {
+        return id;
+    }
 
     public void setId(String id) {
         this.id = id;

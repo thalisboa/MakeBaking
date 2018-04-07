@@ -8,19 +8,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.android.makeabakingapp.R;
-import com.example.android.makeabakingapp.recipes.Ingredients;
 import com.example.android.makeabakingapp.recipes.Steps;
 
 import java.util.List;
 
 
-public class RecipeAdapterDetail extends RecyclerView.Adapter<RecipeAdapterDetail.RecipeDetailHolder> {
+public class StepAdapter extends RecyclerView.Adapter<StepAdapter.RecipeDetailHolder> {
 
     private List<Steps> steps;
     private Context context;
 
-    RecipeAdapterDetail(List<Ingredients> ingredients, List<Steps> steps, Context context) {
-
+    public StepAdapter(List<Steps> steps, Context context) {
 
         this.steps = steps;
         this.context = context;
@@ -31,7 +29,7 @@ public class RecipeAdapterDetail extends RecyclerView.Adapter<RecipeAdapterDetai
     public RecipeDetailHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
         return new RecipeDetailHolder(LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.rv_recipes_details, parent, false));
+                .inflate(R.layout.rv_recipes_details_item, parent, false));
 
     }
 
@@ -40,15 +38,15 @@ public class RecipeAdapterDetail extends RecyclerView.Adapter<RecipeAdapterDetai
 
         if (!steps.isEmpty()) {
 
-            //holder.mId.setText();
-           // holder.mShortDescription.setText();
+            holder.mId.setText(context.getString(R.string.step)+ ": "+ steps.get(position).getId());
+            holder.mShortDescription.setText(steps.get(position).getShortDescription());
 
         }
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return steps.size();
     }
 
     public class RecipeDetailHolder extends RecyclerView.ViewHolder {
@@ -60,8 +58,8 @@ public class RecipeAdapterDetail extends RecyclerView.Adapter<RecipeAdapterDetai
         public RecipeDetailHolder(View itemView) {
             super(itemView);
 
-            mId = itemView.findViewById(R.id.tv_quantity);
-            mShortDescription = itemView.findViewById(R.id.tv_measure);
+            mId = itemView.findViewById(R.id.tv_step_number);
+            mShortDescription = itemView.findViewById(R.id.tv_short_description);
 
         }
     }
