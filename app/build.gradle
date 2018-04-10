@@ -32,6 +32,6 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'org.parceler:parceler-api:1.1.6'
     annotationProcessor 'org.parceler:parceler:1.1.6'
+    // Exoplayer
+    compile 'com.google.android.exoplayer:exoplayer:r2.2.0'
 }
-
-
