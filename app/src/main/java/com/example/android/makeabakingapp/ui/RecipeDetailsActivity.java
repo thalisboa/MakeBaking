@@ -1,24 +1,16 @@
 package com.example.android.makeabakingapp.ui;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
-import android.widget.Button;
 
 import com.example.android.makeabakingapp.R;
-import com.example.android.makeabakingapp.adapter.StepAdapter;
 import com.example.android.makeabakingapp.recipes.Recipe;
+import com.example.android.makeabakingapp.ui.fragments.DetailFragment;
 
 import org.parceler.Parcels;
 
 public class RecipeDetailsActivity extends AppCompatActivity {
-
-    private RecyclerView mRecyclerView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,28 +18,25 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_recipe_details);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         final Recipe recipe = (Recipe) Parcels.unwrap(getIntent().getParcelableExtra("recipe"));
 
-        Button btn = findViewById(R.id.btn_ing);
+        Bundle arguments = new Bundle();
+        arguments.putParcelable("recipe", getIntent().getParcelableExtra("recipe"));
 
-        mRecyclerView = findViewById(R.id.rv_step);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        StepAdapter stepAdapter = new StepAdapter(recipe.getSteps(), this);
+        DetailFragment fragment = new DetailFragment();
+        fragment.setArguments(arguments);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.details_container, fragment)
+                .commit();
 
-        mRecyclerView.setAdapter(stepAdapter);
+    }
 
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(RecipeDetailsActivity.this, IngredientsAcitivity.class);
-
-                intent.putExtra("ingredients", Parcels.wrap(recipe.getIngredients()));
-                startActivity(intent);
-            }
-        });
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.android.makeabakingapp.ui;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.android.makeabakingapp.R;
@@ -31,6 +32,7 @@ public class StepActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_step);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         //pegar o objeto
         final Steps steps = (Steps) Parcels.unwrap(getIntent().getParcelableExtra("steps"));
@@ -40,9 +42,13 @@ public class StepActivity extends AppCompatActivity {
 
         // Initialize the player view.
         mPlayerView = (SimpleExoPlayerView) findViewById(R.id.playerView);
-
-        // Initialize the player.
         initializePlayer(Uri.parse(steps.getVideoURL()));
+
+        String videoUrl = steps.getVideoURL();
+
+        if (!videoUrl.endsWith(".mp4")) {
+            mPlayerView.setVisibility(View.GONE);
+        }
 
     }
 
@@ -73,6 +79,12 @@ public class StepActivity extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         releasePlayer();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 
 }

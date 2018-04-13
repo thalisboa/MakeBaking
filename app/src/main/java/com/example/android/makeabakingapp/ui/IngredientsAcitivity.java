@@ -19,6 +19,7 @@ public class IngredientsAcitivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ingredients);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
         final List<Ingredients> ingredients = Parcels.unwrap(getIntent().getParcelableExtra("ingredients"));
@@ -30,5 +31,11 @@ public class IngredientsAcitivity extends AppCompatActivity {
 
         mRecyclerView.setAdapter(ingredientsAdapter);
 
+    }
+
+    @Override
+    public boolean onSupportNavigateUp(){
+        finish();
+        return true;
     }
 }
