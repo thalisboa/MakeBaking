@@ -29,6 +29,7 @@ public class DetailFragment extends Fragment {
     private Recipe mRecipe;
     private RecyclerView mRecyclerView;
     private Context context;
+    private boolean mTwoPanel = false;
 
     public DetailFragment() {
         // Required empty public constructor
@@ -39,6 +40,8 @@ public class DetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
         context = getActivity();
         mRecipe = Parcels.unwrap(getArguments().getParcelable("recipe"));
+        mTwoPanel = getArguments().getBoolean("twoPanel");
+
     }
 
     @Override
@@ -51,7 +54,7 @@ public class DetailFragment extends Fragment {
 
         mRecyclerView = mRootView.findViewById(R.id.rv_step);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(context));
-        StepAdapter stepAdapter = new StepAdapter(mRecipe.getSteps(), getActivity());
+        StepAdapter stepAdapter = new StepAdapter(mRecipe.getSteps(), getActivity(), mTwoPanel, getFragmentManager());
 
         mRecyclerView.setAdapter(stepAdapter);
 
@@ -59,10 +62,24 @@ public class DetailFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent intent = new Intent(context, IngredientsAcitivity.class);
+                if (mTwoPanel) {
 
-                intent.putExtra("ingredients", Parcels.wrap(mRecipe.getIngredients()));
-                startActivity(intent);
+                    Bundle arguments = new Bundle();
+                    arguments.putParcelable("ingredients", Parcels.wrap(mRecipe.getIngredients()));
+                    IngredientsFragment fragment = new IngredientsFragment();
+
+                    fragment.setArguments(arguments);
+                    getFragmentManager().beginTransaction()
+                            .replace(R.id.step_ingredient_container, fragment)
+                            .commit();
+
+                } else {
+                    Intent intent = new Intent(context, IngredientsAcitivity.class);
+
+                    intent.putExtra("ingredients", Parcels.wrap(mRecipe.getIngredients()));
+                    startActivity(intent);
+                }
+
             }
         });
 

@@ -2,6 +2,8 @@ package com.example.android.makeabakingapp.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import com.example.android.makeabakingapp.R;
 import com.example.android.makeabakingapp.recipes.Steps;
 import com.example.android.makeabakingapp.ui.StepActivity;
+import com.example.android.makeabakingapp.ui.fragments.StepFragment;
 
 import org.parceler.Parcels;
 
@@ -22,11 +25,15 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.RecipeDetailHo
 
     private List<Steps> steps;
     private Context context;
+    private boolean mTwoPanel;
+    private FragmentManager fragmentManager;
 
-    public StepAdapter(List<Steps> steps, Context context) {
+    public StepAdapter(List<Steps> steps, Context context, boolean mTwoPanel, FragmentManager fragmentManager) {
 
         this.steps = steps;
         this.context = context;
+        this.mTwoPanel = mTwoPanel;
+        this.fragmentManager = fragmentManager;
 
     }
 
@@ -43,7 +50,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.RecipeDetailHo
 
         if (!steps.isEmpty()) {
 
-            holder.mId.setText(context.getString(R.string.step)+ ": "+ steps.get(position).getId());
+            holder.mId.setText(context.getString(R.string.step) + ": " + steps.get(position).getId());
             holder.mShortDescription.setText(steps.get(position).getShortDescription());
             holder.mLayoutItem.setOnClickListener(holder);
 
@@ -73,11 +80,23 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.RecipeDetailHo
         @Override
         public void onClick(View view) {
 
-            Intent intent = new Intent(context, StepActivity.class);
+            Steps step = steps.get(getAdapterPosition());
 
-            intent.putExtra("steps", Parcels.wrap(steps.get(getAdapterPosition())));
+            if (mTwoPanel) {
+                Bundle arguments = new Bundle();
+                arguments.putParcelable("step", Parcels.wrap(step));
 
-            context.startActivity(intent);
+                StepFragment fragment = new StepFragment();
+                fragment.setArguments(arguments);
+                fragmentManager.beginTransaction()
+                        .replace(R.id.step_ingredient_container, fragment)
+                        .commit();
+            } else {
+                Intent intent = new Intent(context, StepActivity.class);
+                intent.putExtra("step", Parcels.wrap(step));
+                context.startActivity(intent);
+            }
+
         }
     }
 

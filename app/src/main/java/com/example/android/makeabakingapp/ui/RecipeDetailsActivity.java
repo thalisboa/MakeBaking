@@ -12,6 +12,8 @@ import org.parceler.Parcels;
 
 public class RecipeDetailsActivity extends AppCompatActivity {
 
+    private boolean mTwoPane = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,10 +22,15 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        if (findViewById(R.id.step_ingredient_container) != null) {
+            mTwoPane = true;
+        }
+
         final Recipe recipe = (Recipe) Parcels.unwrap(getIntent().getParcelableExtra("recipe"));
 
         Bundle arguments = new Bundle();
-        arguments.putParcelable("recipe", getIntent().getParcelableExtra("recipe"));
+        arguments.putParcelable("recipe", Parcels.wrap(recipe));
+        arguments.putBoolean("twoPanel", mTwoPane);
 
         DetailFragment fragment = new DetailFragment();
         fragment.setArguments(arguments);

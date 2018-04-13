@@ -2,12 +2,10 @@ package com.example.android.makeabakingapp.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 
 import com.example.android.makeabakingapp.R;
-import com.example.android.makeabakingapp.adapter.IngredientsAdapter;
 import com.example.android.makeabakingapp.recipes.Ingredients;
+import com.example.android.makeabakingapp.ui.fragments.IngredientsFragment;
 
 import org.parceler.Parcels;
 
@@ -24,17 +22,20 @@ public class IngredientsAcitivity extends AppCompatActivity {
 
         final List<Ingredients> ingredients = Parcels.unwrap(getIntent().getParcelableExtra("ingredients"));
 
+        Bundle arguments = new Bundle();
+        arguments.putParcelable("ingredients", getIntent().getParcelableExtra("ingredients"));
+        IngredientsFragment fragment = new IngredientsFragment();
 
-        RecyclerView mRecyclerView = findViewById(R.id.rv_ingredients);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        IngredientsAdapter ingredientsAdapter = new IngredientsAdapter(ingredients, this);
+        fragment.setArguments(arguments);
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.ingredients_container, fragment)
+                .commit();
 
-        mRecyclerView.setAdapter(ingredientsAdapter);
 
     }
 
     @Override
-    public boolean onSupportNavigateUp(){
+    public boolean onSupportNavigateUp() {
         finish();
         return true;
     }
