@@ -1,5 +1,7 @@
 package com.example.android.makeabakingapp.ui;
 
+import android.appwidget.AppWidgetManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,11 +25,26 @@ public class MainActivity extends AppCompatActivity {
     private static final Object TAG = "test";
     private RecyclerView mRecyclerView;
     private Button mBtRetry;
+    private int mAppWidgetId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Widget configuration
+        Intent intent = getIntent();
+        mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
+
+        if (AppWidgetManager.ACTION_APPWIDGET_CONFIGURE.equals(intent.getAction())) {
+
+            Bundle extras = intent.getExtras();
+            if (extras != null) {
+                mAppWidgetId = extras.getInt(
+                        AppWidgetManager.EXTRA_APPWIDGET_ID,
+                        AppWidgetManager.INVALID_APPWIDGET_ID);
+            }
+        }
 
         mRecyclerView = findViewById(R.id.rv_recipes);
         mBtRetry = findViewById(R.id.bt_retry);
@@ -56,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 List<Recipe> recipes = response.body();
 
                 mRecyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-                RecipeAdapter recipeAdapter = new RecipeAdapter(MainActivity.this, recipes);
+                RecipeAdapter recipeAdapter = new RecipeAdapter(MainActivity.this, recipes, mAppWidgetId);
                 mRecyclerView.setAdapter(recipeAdapter);
 
                 mRecyclerView.setVisibility(View.VISIBLE);
