@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Baking Time</string>
     <string name="title_activity_recipe_details">RecipeDetailsActivity</string>
-    <string name="ingredients">Ingredientes</string>
+    <string name="ingredients">Ingredients</string>
     <string name="step">step</string>
 
     <!-- TODO: Remove or change this placeholder text -->
