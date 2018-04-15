@@ -1,4 +1,4 @@
-package com.example.android.makeabakingapp;
+package com.example.android.makeabakingapp.ui.widget;
 
 /**
  * Created by thais.nonato on 4/14/2018.

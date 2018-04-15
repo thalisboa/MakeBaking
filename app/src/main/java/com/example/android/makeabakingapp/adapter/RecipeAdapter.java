@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.android.makeabakingapp.IngredientsAppWidget;
+import com.example.android.makeabakingapp.ui.widget.IngredientsAppWidget;
 import com.example.android.makeabakingapp.R;
 import com.example.android.makeabakingapp.recipes.Recipe;
 import com.example.android.makeabakingapp.ui.RecipeDetailsActivity;

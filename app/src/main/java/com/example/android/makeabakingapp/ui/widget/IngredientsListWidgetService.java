@@ -1,4 +1,4 @@
-package com.example.android.makeabakingapp;
+package com.example.android.makeabakingapp.ui.widget;
 
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
+import com.example.android.makeabakingapp.R;
 import com.example.android.makeabakingapp.recipes.Ingredients;
 import com.example.android.makeabakingapp.recipes.Recipe;
 

@@ -1,4 +1,4 @@
-package com.example.android.makeabakingapp;
+package com.example.android.makeabakingapp.ui.widget;
 
 import android.content.Context;
 import android.content.SharedPreferences;
