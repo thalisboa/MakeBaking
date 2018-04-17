@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <appwidget-provider xmlns:android="http://schemas.android.com/apk/res/android"
-    android:initialKeyguardLayout="@layout/ingredients_app_widget"
+    android:initialKeyguardLayout="@layout/ingredients_list_widget"
     android:configure="com.example.android.makeabakingapp.ui.MainActivity"
     android:initialLayout="@layout/ingredients_list_widget"
     android:minHeight="180dp"
